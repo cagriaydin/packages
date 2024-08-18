@@ -16,7 +16,7 @@ import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.exoplayer.ExoPlayer;
-import androidx.media3.exoplayer;
+import androidx.media3.exoplayer.LoadControl;
 // import com.google.android.exoplayer2.LoadControl;
 // import com.google.android.exoplayer2.DefaultLoadControl;
 import io.flutter.view.TextureRegistry;
@@ -48,7 +48,7 @@ final class VideoPlayer {
       VideoPlayerOptions options) {
     ExoPlayer.Builder exoPlayerBuilder =
         new ExoPlayer.Builder(context).setMediaSourceFactory(asset.getMediaSourceFactory(context));
-    return new VideoPlayer(builder, events, textureEntry, asset.getMediaItem(), options);
+    return new VideoPlayer(exoPlayerBuilder, events, textureEntry, asset.getMediaItem(), options);
   }
 
   @VisibleForTesting
