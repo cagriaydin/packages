@@ -232,7 +232,8 @@ final class VideoPlayer {
               exoPlayer.seekToDefaultPosition();
               exoPlayer.prepare();
             } else if (eventSink != null) {
-              eventSink.error("VideoError", "Video player had error " + error, null);
+              // eventSink.error("VideoError", "Video player had error " + error, null);
+              eventSink.error("VideoError"+ error.getErrorCodeName(), "Video player had error " + error, null);
             }
           }
 
