@@ -46,14 +46,14 @@ final class VideoPlayer {
       TextureRegistry.SurfaceTextureEntry textureEntry,
       VideoAsset asset,
       VideoPlayerOptions options) {
-    ExoPlayer.Builder builder =
+    ExoPlayer.Builder exoPlayerBuilder =
         new ExoPlayer.Builder(context).setMediaSourceFactory(asset.getMediaSourceFactory(context));
     return new VideoPlayer(builder, events, textureEntry, asset.getMediaItem(), options);
   }
 
   @VisibleForTesting
   VideoPlayer(
-      ExoPlayer.Builder builder,
+      ExoPlayer.Builder exoPlayerBuilder,
       VideoPlayerCallbacks events,
       TextureRegistry.SurfaceTextureEntry textureEntry,
       MediaItem mediaItem,
@@ -62,7 +62,8 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    ExoPlayer.Builder exoPlayerBuilder = new ExoPlayer.Builder(context);
+    // ExoPlayer exoPlayer = builder.build();
+    // ExoPlayer.Builder exoPlayerBuilder = new ExoPlayer.Builder(context);
 
     DefaultLoadControl.Builder builder = new DefaultLoadControl.Builder()
     .setBufferDurationsMs(
@@ -79,7 +80,7 @@ final class VideoPlayer {
 
     exoPlayerBuilder.setLoadControl(loadControl);
 
-    exoPlayer = exoPlayerBuilder.build();
+    ExoPlayer exoPlayer = exoPlayerBuilder.build();
 
     exoPlayer.setMediaItem(mediaItem);
     exoPlayer.prepare();
