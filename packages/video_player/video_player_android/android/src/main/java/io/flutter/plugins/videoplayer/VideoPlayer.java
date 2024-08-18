@@ -16,11 +16,15 @@ import androidx.media3.common.C;
 import androidx.media3.common.MediaItem;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.exoplayer;
+// import com.google.android.exoplayer2.LoadControl;
+// import com.google.android.exoplayer2.DefaultLoadControl;
 import io.flutter.view.TextureRegistry;
 
 final class VideoPlayer {
   private ExoPlayer exoPlayer;
   private Surface surface;
+  private LoadControl loadControl;
   private final TextureRegistry.SurfaceTextureEntry textureEntry;
   private final VideoPlayerCallbacks videoPlayerEvents;
   private final VideoPlayerOptions options;
@@ -58,7 +62,25 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    ExoPlayer exoPlayer = builder.build();
+    ExoPlayer.Builder exoPlayerBuilder = new ExoPlayer.Builder(context);
+
+    DefaultLoadControl.Builder builder = new DefaultLoadControl.Builder()
+    .setBufferDurationsMs(
+                        (int)20000, // minBufferDuration
+                        (int)20000, // maxBufferDuration
+                        (int)2500, // bufferForPlaybackDuration
+                        (int)5000 // bufferForPlaybackAfterRebufferDuration
+                    )
+                    .setPrioritizeTimeOverSizeThresholds(true) // prioritizeTimeOverSizeThresholds
+                    .setBackBuffer((int)0, false); // backBufferDuration
+
+
+    loadControl = builder.build();
+
+    exoPlayerBuilder.setLoadControl(loadControl);
+
+    exoPlayer = exoPlayerBuilder.build();
+
     exoPlayer.setMediaItem(mediaItem);
     exoPlayer.prepare();
 

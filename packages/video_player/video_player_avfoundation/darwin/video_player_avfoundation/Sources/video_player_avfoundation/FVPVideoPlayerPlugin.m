@@ -271,6 +271,11 @@ NS_INLINE CGFloat radiansToDegrees(CGFloat radians) {
   _registrar = registrar;
   _frameUpdater = frameUpdater;
 
+  // Reducing the pre-cache mechanisim, saving data usage
+  item.preferredPeakBitRate = 3000000; // Example value: 3 Mbps
+  item.preferredForwardBufferDuration = 20.0; // Example value: 20 seconds
+  item.canUseNetworkResourcesForLiveStreamingWhilePaused = YES; // Example value: YES
+
   AVAsset *asset = [item asset];
   void (^assetCompletionHandler)(void) = ^{
     if ([asset statusOfValueForKey:@"tracks" error:nil] == AVKeyValueStatusLoaded) {
