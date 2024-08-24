@@ -29,12 +29,12 @@ dependencies:
     git:
       url: https://github.com/cagriaydin/packages.git
       path: packages/video_player/video_player_android
-      ref: geo_restriction
+      ref: geo_restriction_v2
   video_player_avfoundation:
     git:
       url: https://github.com/cagriaydin/packages.git
       path: packages/video_player/video_player_avfoundation
-      ref: geo_restriction
+      ref: geo_restriction_v2
   video_player_platform_interface: ">=6.1.0 <7.0.0"
   video_player_web: ^2.0.0
 
